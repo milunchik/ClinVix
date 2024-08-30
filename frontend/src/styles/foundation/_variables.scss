@@ -1,0 +1,87 @@
+/*-------------------------
+|          COLORS         |
+-------------------------*/
+
+$primary: #98C8D1;
+$secondary: #F3F2F2;
+$turquoise: #30988F;
+$green: #008000;
+$purple: #989ED1;
+
+/*-------------------------
+|       TYPOGRAPHY        |
+-------------------------*/
+
+// Font sizes
+$font-size-sm: 0.8rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.7rem;
+$font-size-xl: 2rem;
+$font-size-2xl: 2.75rem;
+$font-size-3xl: 3.375rem;
+
+// Font weights
+$font-weight-md: 400;
+$font-weight-lg: 600;
+$font-weight-xl: 700;
+
+// Additional styles
+$font-underlined: underline;
+$font-upper: uppercase;
+
+/*-------------------------
+|       BREAKPOINTS       |
+-------------------------*/
+
+$screen-xs: 0rem;
+$screen-sm: 30rem;
+$screen-md: 48rem;
+$screen-lg: 64rem;
+$screen-xl: 90rem;
+
+$breakpoints: (
+    xs: $screen-xs,
+    sm: $screen-sm,
+    md: $screen-md,
+    lg: $screen-lg,
+    xl: $screen-xl,
+);
+
+/*-------------------------
+|         Shadows         |
+-------------------------*/
+
+$shadow-black-sm: 0px 2px 4px rgb(0, 0, 0 / 0.1);
+$shadow-black-md: 1px 4px 8px rgb(0, 0, 0 / 0.1);
+$shadow-black-lg: 2px 6px 12px rgb(0, 0, 0 / 0.1);
+
+/*-------------------------
+|         Borders         |
+-------------------------*/
+
+// Strokes
+$border-primary-sm: 3px solid $primary;
+$border-primary-md: 5px solid $primary;
+$border-primary-sm: 8px solid $primary;
+$border-secondary: 1px solid $secondary;
+
+// Radiuses
+$rounded-full: 50%;
+$radius-sm: 5px;
+$radius-md: 13px;
+$radius-lg: 21px;
+$radius-full: 1000rem;
+
+/*-------------------------
+|       TRANSITIONS       |
+-------------------------*/
+
+// Durations
+$duration-fast: 0.3s;
+$duration-meduim: 0.5s;
+$duration-slow: 0.8s;
+
+// Animations
+$anim-fast: ease all $duration-fast;
+$anim-fast: ease all $duration-meduim;
+$anim-fast: ease all $duration-slow;
