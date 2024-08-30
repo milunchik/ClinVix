@@ -1,0 +1,8 @@
+@import "foundation/variables";
+@import "foundation/mixins";
+
+body {
+    font-family: $abel;
+    font-size: $font-size-md;
+    box-sizing: border-box;
+}
