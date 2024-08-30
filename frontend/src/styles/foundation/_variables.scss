@@ -1,3 +1,5 @@
+@import "fonts";
+
 /*-------------------------
 |          COLORS         |
 -------------------------*/
@@ -24,6 +26,11 @@ $font-size-3xl: 3.375rem;
 $font-weight-md: 400;
 $font-weight-lg: 600;
 $font-weight-xl: 700;
+
+// Font families
+$inter: "Inter", sans-serif;
+$abel: "Abel", sans-serif;
+$amiko: "Amiko", sans-serif;
 
 // Additional styles
 $font-underlined: underline;
