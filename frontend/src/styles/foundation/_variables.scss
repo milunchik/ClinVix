@@ -4,11 +4,11 @@
 |          COLORS         |
 -------------------------*/
 
-$primary: #98C8D1;
-$secondary: #F3F2F2;
-$turquoise: #30988F;
+$primary: #98c8d1;
+$secondary: #f3f2f2;
+$turquoise: #30988f;
 $green: #008000;
-$purple: #989ED1;
+$purple: #989ed1;
 
 /*-------------------------
 |       TYPOGRAPHY        |
@@ -47,11 +47,11 @@ $screen-lg: 64rem;
 $screen-xl: 90rem;
 
 $breakpoints: (
-    xs: $screen-xs,
-    sm: $screen-sm,
-    md: $screen-md,
-    lg: $screen-lg,
-    xl: $screen-xl,
+  xs: $screen-xs,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg,
+  xl: $screen-xl,
 );
 
 /*-------------------------
@@ -90,5 +90,5 @@ $duration-slow: 0.8s;
 
 // Animations
 $anim-fast: ease all $duration-fast;
-$anim-fast: ease all $duration-meduim;
-$anim-fast: ease all $duration-slow;
+$anim-md: ease all $duration-meduim;
+$anim-slow: ease all $duration-slow;
