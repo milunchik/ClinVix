@@ -12,7 +12,7 @@ const Logo = ({ children, variant = "md" }: PropsWithChildren<LogoProps>) => {
   return (
     <a href="/" className={styles[`container-${variant}`]}>
       <img src={logo} alt="ClinVix logo" />
-      <span>{children}</span>
+      <div>{children}</div>
     </a>
   );
 };

@@ -1,0 +1,30 @@
+footer {
+  border: 3px $primary solid;
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .info {
+    display: flex;
+    flex-direction: column;
+    font-family: $inter;
+    font-size: $font-size-sm;
+
+    & > div {
+      margin-top: 0.25rem;
+    }
+
+    & p {
+      margin: 0;
+    }
+  }
+}
+
+.mailBox {
+  display: flex;
+  overflow: hidden;
+  border-radius: $radius-sm;
+}
