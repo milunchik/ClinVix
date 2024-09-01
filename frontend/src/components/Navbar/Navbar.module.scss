@@ -14,28 +14,36 @@ $aligns: "left", "center", "right";
   }
 }
 
-.navList {
+@mixin navList() {
   list-style: none;
   padding-left: 0;
   display: flex;
   align-items: center;
   gap: 1.2rem;
 
+  & a {
+    font-size: $font-size-md;
+    transition: $anim-fast;
+
+    // temp
+    color: black;
+    text-decoration: none;
+    //
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+.navList-base {
+  @include navList();
+}
+
+.navList-decorated {
+  @include navList();
+
   & li {
     border-bottom: 0.5px rgba(0, 0, 0, 0.3) solid;
-
-    & a {
-      font-size: $font-size-md;
-      transition: $anim-fast;
-
-      // temp
-      color: black;
-      text-decoration: none;
-      //
-
-      &:hover {
-        color: $primary;
-      }
-    }
   }
 }

@@ -1,10 +1,11 @@
 import styles from "./Navbar.module.scss";
 
 interface NavbarProps {
-  align: "left" | "center" | "right";
+  align?: "left" | "center" | "right";
+  variant?: "base" | "decorated";
 }
 
-const Navbar = ({ align }: NavbarProps) => {
+const Navbar = ({ align = "center", variant = "base" }: NavbarProps) => {
   const navLinks = Array.from({ length: 6 }, (_, index) => (
     <li key={index + "key"}>
       <a href="/">Link {index + 1}</a>
@@ -13,7 +14,7 @@ const Navbar = ({ align }: NavbarProps) => {
 
   return (
     <nav className={styles[`navbar-${align}`]}>
-      <ul className={styles.navList}>{navLinks}</ul>
+      <ul className={styles[`navList-${variant}`]}>{navLinks}</ul>
     </nav>
   );
 };

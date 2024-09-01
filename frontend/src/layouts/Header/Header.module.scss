@@ -6,9 +6,9 @@
 }
 
 .header {
-  @include header(1fr 1fr 1fr)
+  @include header(1fr auto 1fr)
 }
 
 .header-with-content {
-  @include header(1fr auto 1fr)
+  @include header(auto 1fr auto)
 }

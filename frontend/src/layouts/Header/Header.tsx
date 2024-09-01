@@ -10,7 +10,7 @@ const Header = ({ children }: PropsWithChildren) => {
       className={children ? styles["header-with-content"] : styles["header"]}
     >
       <Logo>ClinVix</Logo>
-      <Navbar align={children ? "center" : "right"} />
+      <Navbar variant="decorated" align={children ? "right" : "center"} />
       {children}
     </header>
   );
