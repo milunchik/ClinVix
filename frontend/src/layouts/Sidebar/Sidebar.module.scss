@@ -1,0 +1,61 @@
+@mixin row {
+  width: 100dvw;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+@mixin col {
+  height: 100dvh;
+  flex-direction: column;
+}
+
+.sidebar {
+  background: #fff;
+  display: flex;
+  position: absolute;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.sidebar-top {
+  top: 0;
+  border-bottom: $primary 3px solid;
+
+  @include row;
+}
+
+.sidebar-right {
+  top: 0;
+  border-left: $primary 3px solid;
+  right: 0;
+
+  @include col;
+
+  ul {
+    align-self: flex-end;
+  }
+
+  & > a {
+    padding: 1rem;
+  }
+}
+
+.sidebar-bottom {
+  bottom: 0;
+  left: 0;
+  border-top: $primary 3px solid;
+
+  @include row;
+}
+
+.sidebar-left {
+  top: 0;
+  border-right: $primary 3px solid;
+
+  @include col;
+
+  & > a {
+    padding: 1rem 2rem 1rem 1rem;
+  }
+}

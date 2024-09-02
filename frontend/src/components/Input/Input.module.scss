@@ -16,6 +16,6 @@
 }
 
 .input-rounded {
-  @include input();
   border-radius: $radius-sm;
+  @include input();
 }
