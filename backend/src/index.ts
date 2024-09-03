@@ -3,11 +3,18 @@ import { AppDataSource } from "./utils/data-source";
 import express from "express";
 import router from "./routes/routes";
 import AuthRouter from "./routes/auth.routes";
+const cookieSession = require("cookie-session");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+
+app.use(
+  cookieSession({
+    keys: ["kjfkdjf"],
+  })
+);
 
 app.use(router);
 app.use(AuthRouter);

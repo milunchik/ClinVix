@@ -58,6 +58,10 @@ export class AuthControllers {
         throw new Error("Invalid password ");
       }
 
+      if (req.session) {
+        req.session.userId = user.id;
+      }
+
       res.status(200).json(user);
     } catch (err) {
       console.log(err);
@@ -65,7 +69,16 @@ export class AuthControllers {
     }
   }
 
-  async signout(req: Request, res: Response) {}
+  async signout(req: Request, res: Response) {
+    if (req.session) {
+      req.session.destroy((err: Error) => {
+        if (err) {
+          return res.status(404).json({ message: "Failed to sign out" });
+        }
+      });
+      return res.status(200).json({ message: "Signed out" });
+    }
+  }
 
   delete = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);

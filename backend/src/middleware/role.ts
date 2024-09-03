@@ -9,51 +9,39 @@ export class RoleAssignment {
     const roleRepository = AppDataSource.getRepository(Role);
     let newUser;
 
+    const roleEntity = await roleRepository.findOne({ where: { value: role } });
+    if (!roleEntity) {
+      throw new Error("Role not found");
+    }
+
     if (role === "doctor") {
       const doctorRepository = AppDataSource.getRepository(Doctor);
-      newUser = doctorRepository.create({ email, password });
-      await doctorRepository.save(newUser);
-
-      const newRole = roleRepository.create({
-        value: "doctor",
-        doctor: newUser,
+      newUser = doctorRepository.create({
+        email,
+        password,
+        role: roleEntity,
       });
-      await roleRepository.save(newRole);
 
-      newUser.role = newRole;
       await doctorRepository.save(newUser);
-
-      return newUser;
     } else if (role === "manager") {
       const managerRepository = AppDataSource.getRepository(Manager);
-      newUser = managerRepository.create({ email, password });
-      await managerRepository.save(newUser);
-
-      const newRole = roleRepository.create({
-        value: "manager",
-        manager: newUser,
+      newUser = managerRepository.create({
+        email,
+        password,
+        role: roleEntity,
       });
-      await roleRepository.save(newRole);
-
-      newUser.role = newRole;
       await managerRepository.save(newUser);
-
-      return newUser;
     } else {
       const userRepository = AppDataSource.getRepository(User);
-      newUser = userRepository.create({ email, password });
-      await userRepository.save(newUser);
-
-      const newRole = roleRepository.create({
-        value: "user",
-        user: newUser,
+      newUser = userRepository.create({
+        email,
+        password,
+        role: roleEntity,
       });
-      await roleRepository.save(newRole);
 
-      newUser.role = newRole;
       await userRepository.save(newUser);
-
-      return newUser;
     }
+
+    return newUser;
   }
 }
