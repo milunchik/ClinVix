@@ -3,6 +3,7 @@ import { PropsWithChildren } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Sidebar from "./Sidebar/Sidebar";
+import Wrapper from "./Wrapper/Wrapper";
 
 interface AppLayoutProps {
   hasFooter?: boolean;
@@ -18,8 +19,10 @@ const AppLayout = ({
         <Header />
         <Sidebar.Menu />
       </Sidebar>
-      {children}
-      {hasFooter && <Footer />}
+      <Wrapper>
+        {children}
+        {hasFooter && <Footer />}
+      </Wrapper>
     </div>
   );
 };
