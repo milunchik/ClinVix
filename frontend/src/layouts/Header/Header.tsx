@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 
 import Logo from "../../components/Logo/Logo";
 import Navbar from "../../components/Navbar/Navbar";
+import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Header.module.scss";
 
 const Header = ({ children }: PropsWithChildren) => {
@@ -9,6 +10,7 @@ const Header = ({ children }: PropsWithChildren) => {
     <header
       className={children ? styles["header-with-content"] : styles["header"]}
     >
+      <Sidebar.ToggleButton />
       <Logo>ClinVix</Logo>
       <Navbar variant="decorated" align={children ? "right" : "center"} />
       {children}

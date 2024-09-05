@@ -1,20 +1,15 @@
-interface MailProps {
-  color?: string;
-  bgColor?: string;
-  width?: string;
-  height?: string;
-}
+import { SVGComponentProps } from "../../types";
 
 const Mail = ({
   color = "white",
   bgColor = "none",
-  width,
-  height,
-}: MailProps) => {
+  width = "22",
+  height = "18",
+}: SVGComponentProps) => {
   return (
     <svg
-      width={width || "22"}
-      height={height || "18"}
+      width={width}
+      height={height}
       viewBox="0 0 22 18"
       fill={bgColor}
       xmlns="http://www.w3.org/2000/svg"

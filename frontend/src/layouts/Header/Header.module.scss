@@ -3,12 +3,35 @@
   align-items: center;
   padding: 0.5rem 1rem;
   grid-template-columns: $cols;
+  gap: 1rem;
 }
 
 .header {
-  @include header(1fr auto 1fr)
+  @include header(1fr 1fr);
+
+  ul {
+    display: none;
+  }
+
+  & > a {
+    justify-self: end;
+  }
 }
 
 .header-with-content {
-  @include header(auto 1fr auto)
+  @include header(auto 1fr auto);
+}
+
+@include breakpoints($screen-sm) {
+  .header {
+    @include header(1fr auto 1fr);
+
+    ul {
+      display: flex;
+    }
+
+    & > a {
+      justify-self: start;
+    }
+  }
 }

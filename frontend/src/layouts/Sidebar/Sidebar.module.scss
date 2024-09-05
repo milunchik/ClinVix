@@ -3,14 +3,28 @@
   justify-content: space-around;
   align-items: center;
   padding: 1rem 0;
+  height: 0;
+  transition: $anim-md;
 }
 
 @mixin col {
-  height: 100dvh;
+  height: 100vh;
+  width: 0;
   flex-direction: column;
+  transition: $anim-md;
+}
+
+@mixin button {
+  background: transparent;
+  border: 0;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .sidebar {
+  padding: 1rem 0;
   background: #fff;
   display: flex;
   position: absolute;
@@ -20,14 +34,12 @@
 
 .sidebar-top {
   top: 0;
-  border-bottom: $primary 3px solid;
 
   @include row;
 }
 
 .sidebar-right {
   top: 0;
-  border-left: $primary 3px solid;
   right: 0;
 
   @include col;
@@ -44,18 +56,50 @@
 .sidebar-bottom {
   bottom: 0;
   left: 0;
-  border-top: $primary 3px solid;
 
   @include row;
 }
 
 .sidebar-left {
   top: 0;
-  border-right: $primary 3px solid;
 
   @include col;
 
   & > a {
     padding: 1rem 2rem 1rem 1rem;
   }
+}
+
+.burger {
+  @include button();
+}
+
+@include breakpoints($screen-sm) {
+  .burger {
+    display: none;
+  }
+}
+
+.close {
+  @include button();
+
+  align-self: flex-end;
+}
+
+.sidebar-top.open {
+  height: 10rem;
+  border-bottom: $primary 3px solid;
+}
+.sidebar-bottom.open {
+  height: 10rem;
+  border-top: $primary 3px solid;
+}
+
+.sidebar-right.open {
+  width: 10rem;
+  border-left: $primary 3px solid;
+}
+.sidebar-left.open {
+  width: 10rem;
+  border-right: $primary 3px solid;
 }

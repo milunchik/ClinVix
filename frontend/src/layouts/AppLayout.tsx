@@ -14,8 +14,10 @@ const AppLayout = ({
 }: PropsWithChildren<AppLayoutProps>) => {
   return (
     <div>
-      <Header />
-      <Sidebar />
+      <Sidebar>
+        <Header />
+        <Sidebar.Menu />
+      </Sidebar>
       {children}
       {hasFooter && <Footer />}
     </div>
