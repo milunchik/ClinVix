@@ -1,0 +1,27 @@
+.wrapper {
+  margin: 0 auto;
+}
+
+@include breakpoints($screen-sm) {
+  .wrapper {
+    padding: 0 3rem;
+  }
+}
+
+@include breakpoints($screen-md) {
+  .wrapper {
+    max-width: $screen-md;
+  }
+}
+
+@include breakpoints($screen-lg) {
+  .wrapper {
+    max-width: $screen-lg;
+  }
+}
+
+@include breakpoints($screen-xl) {
+  .wrapper {
+    max-width: $screen-xl;
+  }
+}

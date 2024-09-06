@@ -1,0 +1,76 @@
+@mixin navList($display) {
+  list-style: none;
+  padding-left: 0;
+  display: $display;
+  align-items: center;
+
+  a {
+    font-size: $font-size-md;
+    transition: $anim-fast;
+
+    // temp
+    color: black;
+    text-decoration: none;
+    //
+  }
+}
+
+.navbar-left {
+  justify-self: left;
+  padding-right: 5rem;
+}
+
+.navbar-center {
+  justify-self: left;
+}
+
+.navbar-right {
+  justify-self: left;
+  padding-right: 5rem;
+}
+
+.navList-base {
+  @include navList(flex);
+}
+
+.navList-decorated {
+  @include navList(flex);
+
+  li {
+    border-bottom: 0.5px rgba(0, 0, 0, 0.3) solid;
+  }
+}
+
+.navList-col {
+  flex-direction: column;
+
+  li {
+    transition: $anim-fast;
+    width: 100%;
+  }
+
+  li:hover {
+    background: $secondary;
+  }
+
+  a {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+  }
+}
+
+.navList-row {
+  gap: 1.2rem;
+  flex-direction: column;
+
+  a:hover {
+    color: $primary;
+  }
+}
+
+@include breakpoints($screen-sm) {
+  .navList-row {
+    flex-direction: row;
+  }
+}

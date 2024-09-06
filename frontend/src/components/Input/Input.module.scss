@@ -1,0 +1,21 @@
+@mixin input() {
+  height: fit-content;
+  padding: 0.6rem 1rem;
+  border: 0;
+  background: $secondary;
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: $font-weight-lg;
+
+  &:focus {
+    outline: 2px solid $primary;
+  }
+}
+
+.input {
+  @include input();
+}
+
+.input-rounded {
+  border-radius: $radius-sm;
+  @include input();
+}

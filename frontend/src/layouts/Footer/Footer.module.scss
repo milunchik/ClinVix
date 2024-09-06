@@ -1,0 +1,41 @@
+footer {
+  border: 3px $primary solid;
+  max-width: 85rem;
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  overflow: hidden;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    font-family: $inter;
+    font-size: $font-size-sm;
+    align-self: flex-start;
+
+    & > div {
+      margin-top: 0.25rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.mailBox {
+  display: flex;
+  overflow: hidden;
+  border-radius: $radius-sm;
+}
+
+@include breakpoints($screen-sm) {
+  footer {
+    flex-direction: row;
+  }
+}
