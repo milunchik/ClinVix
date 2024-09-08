@@ -26,7 +26,7 @@ export const userRouter: RouteObject[] = [
   {
     path: userRoutes.home.path,
     element: (
-      <div>
+      <div className="container">
         <Sidebar>
           <Header>
             <span style={{ justifySelf: "end" }}>Button</span>
@@ -34,7 +34,13 @@ export const userRouter: RouteObject[] = [
           <Sidebar.Menu />
         </Sidebar>
         <Wrapper>
-          <Suspense fallback={<Spinner />}>
+          <Suspense
+            fallback={
+              <div className="container">
+                <Spinner />
+              </div>
+            }
+          >
             <Home />
           </Suspense>
         </Wrapper>

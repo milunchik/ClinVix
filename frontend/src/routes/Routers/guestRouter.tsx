@@ -15,7 +15,13 @@ export const guestRouter: RouteObject[] = [
   {
     path: guestRoutes.signIn.path,
     element: (
-      <Suspense fallback={<Spinner />}>
+      <Suspense
+        fallback={
+          <div className="container">
+            <Spinner />
+          </div>
+        }
+      >
         <SignIn />
       </Suspense>
     ),
@@ -24,7 +30,13 @@ export const guestRouter: RouteObject[] = [
   {
     path: guestRoutes.signUp.path,
     element: (
-      <Suspense fallback={<Spinner />}>
+      <Suspense
+        fallback={
+          <div className="container">
+            <Spinner />
+          </div>
+        }
+      >
         <SignUp />
       </Suspense>
     ),

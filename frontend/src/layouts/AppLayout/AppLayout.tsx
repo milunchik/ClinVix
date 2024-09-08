@@ -13,7 +13,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({ hasFooter = true }: AppLayoutProps) => {
   return (
-    <div>
+    <div className="container">
       <Sidebar>
         <Header />
         <Sidebar.Menu />
@@ -22,8 +22,8 @@ const AppLayout = ({ hasFooter = true }: AppLayoutProps) => {
         <Suspense fallback={<Spinner />}>
           <Outlet />
         </Suspense>
-        {hasFooter && <Footer />}
       </Wrapper>
+      {hasFooter && <Footer />}
     </div>
   );
 };

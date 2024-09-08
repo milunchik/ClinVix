@@ -1,11 +1,8 @@
 .wrapper {
   margin: 0 auto;
-}
-
-@include breakpoints($screen-sm) {
-  .wrapper {
-    padding: 0 3rem;
-  }
+  padding: 0 1rem;
+  flex-grow: 1;
+  width: calc(100% - 2rem);
 }
 
 @include breakpoints($screen-md) {
