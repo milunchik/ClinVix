@@ -1,18 +1,26 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 
 import Sidebar from "../../layouts/Sidebar/Sidebar";
 import Header from "../../layouts/Header/Header";
 import Wrapper from "../../layouts/Wrapper/Wrapper";
 import AppLayout from "../../layouts/AppLayout/AppLayout";
-import Home from "../../pages/Home/Home";
-import ErrorFallback from "../../pages/ErrorFallback/ErrorFallback";
-import About from "../../pages/About/About";
-import Tips from "../../pages/Tips/Tips";
-import Registration from "../../pages/Registration/Registration";
-import Departments from "../../pages/Departments/Departments";
-import Team from "../../pages/Team/Team";
-import Specialist from "../../pages/Specialist/Specialist";
+import Spinner from "../../components/Spinner/Spinner";
 import { userRoutes } from "../../constans/routes/userRoutes";
+
+const Home = lazy(() => import("../../pages/Home/Home"));
+const About = lazy(() => import("../../pages/About/About"));
+const Tips = lazy(() => import("../../pages/Tips/Tips"));
+const Registration = lazy(
+  () => import("../../pages/Registration/Registration")
+);
+const Departments = lazy(() => import("../../pages/Departments/Departments"));
+const Team = lazy(() => import("../../pages/Team/Team"));
+const Specialist = lazy(() => import("../../pages/Specialist/Specialist"));
+const ErrorFallback = lazy(
+  () => import("../../pages/ErrorFallback/ErrorFallback")
+);
 
 export const userRouter: RouteObject[] = [
   {
@@ -26,7 +34,9 @@ export const userRouter: RouteObject[] = [
           <Sidebar.Menu />
         </Sidebar>
         <Wrapper>
-          <Home />
+          <Suspense fallback={<Spinner />}>
+            <Home />
+          </Suspense>
         </Wrapper>
       </div>
     ),
@@ -34,6 +44,7 @@ export const userRouter: RouteObject[] = [
   },
   {
     element: <AppLayout />,
+    errorElement: <ErrorFallback />,
     children: [
       { path: userRoutes.about.path, element: <About /> },
       { path: userRoutes.tips.path, element: <Tips /> },

@@ -1,10 +1,15 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 import AppLayout from "../../layouts/AppLayout/AppLayout";
-import ErrorFallback from "../../pages/ErrorFallback/ErrorFallback";
-import Timetable from "../../pages/Timetable/Timetable";
 import AdminProtectedRoute from "../ProtectedRoutes/AdminProtectedRoute";
-import { adminRoutes } from "../../constans/routes/AdminRoutes";
+import { adminRoutes } from "../../constans/routes/adminRoutes";
+
+const ErrorFallback = lazy(
+  () => import("../../pages/ErrorFallback/ErrorFallback")
+);
+const Timetable = lazy(() => import("../../pages/Timetable/Timetable"));
 
 export const adminRouter: RouteObject[] = [
   {

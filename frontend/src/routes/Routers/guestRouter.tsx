@@ -1,19 +1,33 @@
+/* eslint-disable react-refresh/only-export-components */
+import { lazy, Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 
-import SignIn from "../../pages/SignIn/SignIn";
-import SignUp from "../../pages/SignUp/SignUp";
-import ErrorFallback from "../../pages/ErrorFallback/ErrorFallback";
 import { guestRoutes } from "../../constans/routes/guestRoutes";
+import Spinner from "../../components/Spinner/Spinner";
+
+const SignIn = lazy(() => import("../../pages/SignIn/SignIn"));
+const SignUp = lazy(() => import("../../pages/SignUp/SignUp"));
+const ErrorFallback = lazy(
+  () => import("../../pages/ErrorFallback/ErrorFallback")
+);
 
 export const guestRouter: RouteObject[] = [
   {
     path: guestRoutes.signIn.path,
-    element: <SignIn />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <SignIn />
+      </Suspense>
+    ),
     errorElement: <ErrorFallback />,
   },
   {
     path: guestRoutes.signUp.path,
-    element: <SignUp />,
+    element: (
+      <Suspense fallback={<Spinner />}>
+        <SignUp />
+      </Suspense>
+    ),
     errorElement: <ErrorFallback />,
   },
 ];
