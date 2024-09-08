@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { Outlet } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -11,8 +11,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({
   hasFooter = true,
-  children,
-}: PropsWithChildren<AppLayoutProps>) => {
+}: AppLayoutProps) => {
   return (
     <div>
       <Sidebar>
@@ -20,7 +19,7 @@ const AppLayout = ({
         <Sidebar.Menu />
       </Sidebar>
       <Wrapper>
-        {children}
+        <Outlet />
         {hasFooter && <Footer />}
       </Wrapper>
     </div>

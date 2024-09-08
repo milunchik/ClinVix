@@ -9,7 +9,7 @@
 .header {
   @include header(1fr 1fr);
 
-  ul {
+  nav {
     display: none;
   }
 
@@ -20,13 +20,29 @@
 
 .header-with-content {
   @include header(auto 1fr auto);
+
+  nav {
+    display: none;
+  }
 }
 
 @include breakpoints($screen-sm) {
   .header {
     @include header(1fr auto 1fr);
 
-    ul {
+    nav {
+      display: flex;
+    }
+
+    & > a {
+      justify-self: start;
+    }
+  }
+
+  .header-with-content {
+    @include header(auto 1fr auto);
+
+    nav {
       display: flex;
     }
 
