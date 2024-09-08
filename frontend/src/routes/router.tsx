@@ -1,16 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import { guestRouter } from "./Routers/guestRouter";
+import ErrorFallback from "../pages/ErrorFallback/ErrorFallback";
 import NotFound from "../pages/NotFound/NotFound";
+import { guestRouter } from "./Routers/guestRouter";
 import { userRouter } from "./Routers/userRouter";
 import { adminRouter } from "./Routers/adminRouter";
 import { doctorRouter } from "./Routers/doctorRouter";
+import UserProtectedRoute from "./ProtectedRoutes/userProtectedRoute";
 
 const router = createBrowserRouter([
-  ...adminRouter,
-  ...doctorRouter,
-  ...userRouter,
   ...guestRouter,
+  {
+    element: <UserProtectedRoute />,
+    errorElement: <ErrorFallback />,
+    children: [...adminRouter, ...doctorRouter, ...userRouter],
+  },
   {
     path: "*",
     element: <NotFound />,

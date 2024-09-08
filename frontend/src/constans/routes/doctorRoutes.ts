@@ -1,5 +1,5 @@
 export const doctorRoutes = {
   profile: {
-    path: "/profile",
+    path: "/profile/:doctorId",
   },
 };

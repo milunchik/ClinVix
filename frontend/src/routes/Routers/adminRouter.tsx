@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 import AppLayout from "../../layouts/AppLayout/AppLayout";
 import ErrorFallback from "../../pages/ErrorFallback/ErrorFallback";
 import Timetable from "../../pages/Timetable/Timetable";
+import AdminProtectedRoute from "../ProtectedRoutes/AdminProtectedRoute";
 import { adminRoutes } from "../../constans/routes/AdminRoutes";
 
 export const adminRouter: RouteObject[] = [
@@ -11,8 +12,13 @@ export const adminRouter: RouteObject[] = [
     errorElement: <ErrorFallback />,
     children: [
       {
-        path: adminRoutes.timetable.path,
-        element: <Timetable />,
+        element: <AdminProtectedRoute />,
+        children: [
+          {
+            path: adminRoutes.timetable.path,
+            element: <Timetable />,
+          },
+        ],
       },
     ],
   },

@@ -9,9 +9,9 @@ import ErrorFallback from "../../pages/ErrorFallback/ErrorFallback";
 import About from "../../pages/About/About";
 import Tips from "../../pages/Tips/Tips";
 import Registration from "../../pages/Registration/Registration";
+import Departments from "../../pages/Departments/Departments";
 import Team from "../../pages/Team/Team";
 import Specialist from "../../pages/Specialist/Specialist";
-import Departments from "../../pages/Departments/Departments";
 import { userRoutes } from "../../constans/routes/userRoutes";
 
 export const userRouter: RouteObject[] = [
@@ -20,7 +20,9 @@ export const userRouter: RouteObject[] = [
     element: (
       <div>
         <Sidebar>
-          <Header />
+          <Header>
+            <span style={{ justifySelf: "end" }}>Button</span>
+          </Header>
           <Sidebar.Menu />
         </Sidebar>
         <Wrapper>
@@ -32,7 +34,6 @@ export const userRouter: RouteObject[] = [
   },
   {
     element: <AppLayout />,
-    errorElement: <ErrorFallback />,
     children: [
       { path: userRoutes.about.path, element: <About /> },
       { path: userRoutes.tips.path, element: <Tips /> },
