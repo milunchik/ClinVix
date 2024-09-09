@@ -3,13 +3,14 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 import AppLayout from "../../layouts/AppLayout/AppLayout";
-import DoctorProtectedRoute from "../ProtectedRoutes/DoctorProtectedRoute";
-import { doctorRoutes } from "../../constans/routes/doctorRoutes";
+import RoleProtectedRoute from "../ProtectedRoutes/RoleProtectedRoute";
+import { doctorRoutes } from "../../constants";
 
 const ErrorFallback = lazy(
   () => import("../../pages/ErrorFallback/ErrorFallback")
 );
 const Profile = lazy(() => import("../../pages/Profile/Profile"));
+const Timetable = lazy(() => import("../../pages/Timetable/Timetable"));
 
 export const doctorRouter: RouteObject[] = [
   {
@@ -17,8 +18,11 @@ export const doctorRouter: RouteObject[] = [
     errorElement: <ErrorFallback />,
     children: [
       {
-        element: <DoctorProtectedRoute />,
-        children: [{ path: doctorRoutes.profile.path, element: <Profile /> }],
+        element: <RoleProtectedRoute currentRole="doctor" redirectPath="/" />,
+        children: [
+          { path: doctorRoutes.profile.path, element: <Profile /> },
+          { path: doctorRoutes.timetable.path, element: <Timetable /> },
+        ],
       },
     ],
   },

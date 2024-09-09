@@ -1,5 +1,12 @@
-import { adminLinks } from "../../constans/routes/adminRoutes";
-import { userLinks } from "../../constans/routes/userRoutes";
+import { NavLink } from "react-router-dom";
+
+import {
+  adminLinks,
+  commonLinks,
+  doctorLinks,
+  guestLinks,
+  userLinks,
+} from "../../constants";
 import { TNavLink } from "../../types";
 import styles from "./Navbar.module.scss";
 
@@ -20,11 +27,11 @@ const Navbar = ({
   let role = "doctor";
   //
 
-  let navLinks: TNavLink[] = [];
+  let navLinks: TNavLink[] = commonLinks;
 
   if (isAuth) {
     if (role === "user") {
-      navLinks = [...userLinks];
+      navLinks = [...navLinks, ...userLinks];
     }
 
     if (role === "doctor") {
@@ -32,15 +39,18 @@ const Navbar = ({
       const doctorId = "1";
       //
       navLinks = [
-        ...userLinks,
+        ...navLinks,
+        ...doctorLinks,
         { path: `/profile/${doctorId}`, label: "Profile" },
       ];
     }
 
     if (role === "admin") {
-      navLinks = [...userLinks, ...adminLinks];
+      navLinks = [...navLinks, ...adminLinks];
     }
-  } else return;
+  } else {
+    navLinks = [...navLinks, ...guestLinks];
+  }
 
   return (
     <nav className={styles[`navbar-${align}`]}>
@@ -51,7 +61,12 @@ const Navbar = ({
       >
         {navLinks.map((link) => (
           <li key={link.path}>
-            <a href={link.path}>{link.label}</a>
+            <NavLink
+              className={({ isActive }) => (isActive ? styles.active : "")}
+              to={link.path}
+            >
+              {link.label}
+            </NavLink>
           </li>
         ))}
       </ul>

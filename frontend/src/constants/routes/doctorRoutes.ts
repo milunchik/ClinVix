@@ -11,5 +11,5 @@ export const doctorRoutes = {
   },
 };
 
-const { profile, timetable } = doctorRoutes;
-export const doctorLinks: TNavLink[] = [profile, timetable];
+const { timetable } = doctorRoutes;
+export const doctorLinks: TNavLink[] = [timetable];

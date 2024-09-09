@@ -3,8 +3,8 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 import AppLayout from "../../layouts/AppLayout/AppLayout";
-import AdminProtectedRoute from "../ProtectedRoutes/AdminProtectedRoute";
-import { adminRoutes } from "../../constans/routes/adminRoutes";
+import RoleProtectedRoute from "../ProtectedRoutes/RoleProtectedRoute";
+import { adminRoutes } from "../../constants";
 
 const ErrorFallback = lazy(
   () => import("../../pages/ErrorFallback/ErrorFallback")
@@ -17,7 +17,7 @@ export const adminRouter: RouteObject[] = [
     errorElement: <ErrorFallback />,
     children: [
       {
-        element: <AdminProtectedRoute />,
+        element: <RoleProtectedRoute currentRole="admin" redirectPath="/" />,
         children: [
           {
             path: adminRoutes.timetable.path,
