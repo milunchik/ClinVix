@@ -6,8 +6,8 @@ const DocRouter = Router();
 const docControllers = new DoctorControllers();
 
 DocRouter.post(
-  "editProfile",
-  upload.single("file"),
+  "/editProfile",
+  upload.single("image"),
   docControllers.editProfile
 );
 
