@@ -21,6 +21,7 @@
   height: fit-content;
   cursor: pointer;
   box-sizing: border-box;
+  padding: 0;
 }
 
 .sidebar {
@@ -75,16 +76,11 @@
   @include button();
 }
 
-@include breakpoints($screen-sm) {
-  .burger {
-    display: none;
-  }
-}
-
 .close {
   @include button();
 
   align-self: flex-end;
+  padding: 0.5rem;
 }
 
 .sidebar-top.open {
@@ -103,4 +99,14 @@
 .sidebar-left.open {
   width: 10rem;
   border-right: $primary 3px solid;
+}
+
+@include breakpoints($screen-md) {
+  .burger {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
 }

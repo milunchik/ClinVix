@@ -7,11 +7,12 @@
   a {
     font-size: $font-size-md;
     transition: $anim-fast;
-
-    // temp
     color: black;
     text-decoration: none;
-    //
+  }
+
+  .active {
+    color: $primary;
   }
 }
 

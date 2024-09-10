@@ -4,3 +4,8 @@ export interface SVGComponentProps {
   width?: string;
   height?: string;
 }
+
+export interface TNavLink {
+  path: string;
+  label: string;
+}

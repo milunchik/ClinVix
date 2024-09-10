@@ -5,4 +5,11 @@ body {
   font-family: $abel;
   font-size: $font-size-md;
   box-sizing: border-box;
+  margin: 0;
+}
+
+.container {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
