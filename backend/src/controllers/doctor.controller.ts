@@ -1,3 +1,4 @@
+import { DoctorDTO } from "../entity/dtos/doctor.profile";
 import { Doctor } from "../entity/Doctor";
 import { AppDataSource } from "../utils/data-source";
 import { Request, Response } from "express";
@@ -6,7 +7,13 @@ const doctorRepository = AppDataSource.getRepository(Doctor);
 
 export class DoctorControllers {
   editProfile = async (req: Request, res: Response) => {
-    const { email, fullname, phone_number, speciality, description } = req.body;
+    const {
+      email,
+      fullname,
+      phone_number,
+      speciality,
+      description,
+    }: DoctorDTO = req.body;
     let image;
 
     const doctor = await doctorRepository.findOne({ where: { email } });
@@ -19,22 +26,18 @@ export class DoctorControllers {
       image = req.file.path.replace(/\\/g, "/");
     }
 
-    if (fullname && phone_number && speciality && description) {
-      const updateProfile = await doctorRepository.update(
-        { email: email },
-        {
-          fullname: fullname,
-          phone_number: phone_number,
-          speciality: speciality,
-          description: description,
-          image: image,
-        }
-      );
+    const updateProfile = await doctorRepository.update(
+      { email: email },
+      {
+        fullname: fullname,
+        phone_number: phone_number,
+        speciality: speciality,
+        description: description,
+        image: image,
+      }
+    );
 
-      res.status(201).json({ message: "Updated" });
-    } else {
-      throw new Error("All fields are neccessary!");
-    }
+    res.status(201).json({ message: "Updated" });
   };
 
   delete = async (req: Request, res: Response) => {

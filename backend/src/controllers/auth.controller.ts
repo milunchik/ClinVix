@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { RoleAssignment } from "../middleware/role";
+import { CreateUserDto } from "../entity/dtos/create-user";
 
 const scrypt = promisify(_scrypt);
 async function hashPassword(password: string) {
@@ -19,7 +20,7 @@ const roleAssignment = new RoleAssignment();
 export class AuthControllers {
   signup = async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
+      const { email, password }: CreateUserDto = req.body;
       const role = "user";
 
       const existingUser = await userRepository.findOne({ where: { email } });
@@ -43,7 +44,7 @@ export class AuthControllers {
 
   signin = async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
+      const { email, password }: CreateUserDto = req.body;
       const user = await userRepository.findOne({ where: { email } });
 
       if (!user) {
