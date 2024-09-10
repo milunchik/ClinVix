@@ -1,36 +1,26 @@
 import "reflect-metadata";
-import { AppDataSource } from "./utils/data-sourse";
+import { AppDataSource } from "./utils/data-source";
 import express from "express";
-import router from "./routes/routes";
-import { Role } from "./entity/Role";
+import AuthRouter from "./routes/auth.routes";
+import DocRouter from "./routes/doctor.routes";
+const cookieSession = require("cookie-session");
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(router);
+app.use(
+  cookieSession({
+    keys: ["kefnkdk"],
+  })
+);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(express.json());
+app.use(AuthRouter);
+app.use(DocRouter);
 
-AppDataSource.initialize()
-  // .then(async () => {
-  //   const roleRepository = AppDataSource.getRepository(Role);
-
-  //   const existingRoles = await roleRepository.find();
-  //   if (existingRoles.length === 0) {
-  //     const userRole = roleRepository.create({ value: "user" });
-  //     const managerRole = roleRepository.create({ value: "manager" });
-  //     const doctorRole = roleRepository.create({ value: "doctor" });
-
-  //     await roleRepository.save(userRole);
-  //     await roleRepository.save(managerRole);
-  //     await roleRepository.save(doctorRole);
-
-  //     console.log("Roles have been initialized.");
-  //   } else {
-  //     console.log("Roles already exist.");
-  //   }
-  // })
-  // .catch((error) => console.log("Error initializing roles", error))
-  .finally(() => {
-    app.listen(PORT, () => {
-      console.log(`Server started on http://localhost:${PORT}`);
-    });
+AppDataSource.initialize().finally(() => {
+  app.listen(PORT, () => {
+    console.log(`Server started on http://localhost:${PORT}`);
   });
+});
