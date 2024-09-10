@@ -17,9 +17,10 @@ const userRepository = AppDataSource.getRepository(User);
 const roleAssignment = new RoleAssignment();
 
 export class AuthControllers {
-  async signup(req: Request, res: Response) {
+  signup = async (req: Request, res: Response) => {
     try {
-      const { email, password, role } = req.body;
+      const { email, password } = req.body;
+      const role = "user";
 
       const existingUser = await userRepository.findOne({ where: { email } });
       if (existingUser) {
@@ -37,11 +38,10 @@ export class AuthControllers {
       res.status(201).json(newUser);
     } catch (err) {
       console.log(err);
-      res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  };
 
-  async signin(req: Request, res: Response) {
+  signin = async (req: Request, res: Response) => {
     try {
       const { email, password } = req.body;
       const user = await userRepository.findOne({ where: { email } });
@@ -57,7 +57,6 @@ export class AuthControllers {
       if (storedHash !== hashedPassword.toString("hex")) {
         throw new Error("Invalid password ");
       }
-
       if (req.session) {
         req.session.userId = user.id;
       }
@@ -67,29 +66,32 @@ export class AuthControllers {
       console.log(err);
       res.status(500).json({ message: "Internal Server Error" });
     }
-  }
+  };
 
-  async signout(req: Request, res: Response) {
+  signout = async (req: Request, res: Response) => {
     if (req.session) {
       req.session.destroy((err: Error) => {
         if (err) {
-          return res.status(404).json({ message: "Failed to sign out" });
+          return res.status(500).json({ message: "Failed to sign out" });
         }
+
+        res.status(200).json({ message: "Signed out" });
       });
-      return res.status(200).json({ message: "Signed out" });
+    } else {
+      res.status(400).json({ message: "No session to destroy" });
     }
-  }
+  };
 
   delete = async (req: Request, res: Response) => {
     const id = parseInt(req.params.id);
-
-    const user = await userRepository.findOneBy({ id });
+    const user = await userRepository.findOne({ where: { id } });
 
     if (!user) {
-      return res.status(404).json({ message: "User not found!" });
+      res.status(404).json({ message: "user not found" });
     }
 
     await userRepository.delete(id);
+
     return res.status(200).json({ message: "Deleted" });
   };
 }
