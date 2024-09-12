@@ -23,6 +23,9 @@ export class SurveyDTO {
   @IsString()
   symptoms: string;
 
+  @IsString()
+  doctor_name: string;
+
   constructor(
     email: string,
     fullname: string,
@@ -30,7 +33,8 @@ export class SurveyDTO {
     age: string,
     symptoms: string,
     date: Date,
-    time: Timestamp
+    time: Timestamp,
+    doctor_name: string
   ) {
     this.email = email;
     this.fullname = fullname;
@@ -39,5 +43,6 @@ export class SurveyDTO {
     this.symptoms = symptoms;
     this.date = date;
     this.time = time;
+    this.doctor_name = doctor_name;
   }
 }

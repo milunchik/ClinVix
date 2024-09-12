@@ -14,7 +14,7 @@ export class Survey {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @ManyToOne(() => User, (user) => user.surveys)
+  @ManyToOne(() => User, (user) => user.surveys, { onDelete: "CASCADE" })
   @JoinColumn({ name: "user_id" })
   user!: User;
 
@@ -30,7 +30,7 @@ export class Survey {
   @Column({ type: "varchar", length: 10 })
   age!: string;
 
-  @ManyToOne(() => Doctor)
+  @ManyToOne(() => Doctor, { onDelete: "SET NULL" })
   @JoinColumn({ name: "doctor_id" })
   doctor!: Doctor;
 
