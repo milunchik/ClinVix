@@ -72,36 +72,44 @@ export class AuthControllers {
   };
 
   signout = async (req: Request, res: Response) => {
-    if (req.session) {
-      req.session.destroy((err: Error) => {
-        if (err) {
-          return res.status(500).json({ message: "Failed to sign out" });
-        }
+    try {
+      if (req.session) {
+        req.session.destroy((err: Error) => {
+          if (err) {
+            return res.status(500).json({ message: "Failed to sign out" });
+          }
 
-        res.status(200).json({ message: "Signed out" });
-      });
-    } else {
-      res.status(400).json({ message: "No session to destroy" });
+          res.status(200).json({ message: "Signed out" });
+        });
+      } else {
+        res.status(400).json({ message: "No session to destroy" });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   delete = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
+    try {
+      const id = parseInt(req.params.id);
 
-    const user = await userRepository.findOne({
-      where: { id },
-      relations: ["surveys"],
-    });
+      const user = await userRepository.findOne({
+        where: { id },
+        relations: ["surveys"],
+      });
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      await surveyRepository.delete({ user: { id: user.id } });
+      await userRepository.delete(id);
+
+      return res
+        .status(200)
+        .json({ message: "User and associated surveys deleted" });
+    } catch (err) {
+      console.log(err);
     }
-
-    await surveyRepository.delete({ user: { id: user.id } });
-    await userRepository.delete(id);
-
-    return res
-      .status(200)
-      .json({ message: "User and associated surveys deleted" });
   };
 }

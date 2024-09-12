@@ -91,53 +91,65 @@ export class SurveyController {
   };
 
   surveyById = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
+    try {
+      const id = parseInt(req.params.id);
 
-    const survey = await surveyRepository.findOneBy({ id });
+      const survey = await surveyRepository.findOneBy({ id });
 
-    if (!survey) {
-      return res.status(404).json({ message: "Survey not found" });
+      if (!survey) {
+        return res.status(404).json({ message: "Survey not found" });
+      }
+
+      return res.status(200).json(survey);
+    } catch (err) {
+      console.log(err);
     }
-
-    return res.status(200).json(survey);
   };
 
   update = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
+    try {
+      const id = parseInt(req.params.id);
 
-    const { email, fullname, phone_number, age, date, time, symptoms } =
-      req.body;
+      const { email, fullname, phone_number, age, date, time, symptoms } =
+        req.body;
 
-    const survey = await surveyRepository.findOneBy({ id: id });
+      const survey = await surveyRepository.findOneBy({ id: id });
 
-    if (!survey) {
-      return res.status(404).json({ message: "Survey not found" });
+      if (!survey) {
+        return res.status(404).json({ message: "Survey not found" });
+      }
+
+      const updatedSurvey = await surveyRepository.update(
+        { id: id },
+        { email, fullname, phone_number, age, date, time, symptoms }
+      );
+
+      await surveyRepository.save(survey);
+
+      return res.status(200).json({ message: "Updated", updatedSurvey });
+    } catch (err) {
+      console.log(err);
     }
-
-    const updatedSurvey = await surveyRepository.update(
-      { id: id },
-      { email, fullname, phone_number, age, date, time, symptoms }
-    );
-
-    await surveyRepository.save(survey);
-
-    return res.status(200).json({ message: "Updated", updatedSurvey });
   };
 
   delete = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
+    try {
+      const id = parseInt(req.params.id);
 
-    const survey = await surveyRepository.findOne({
-      where: { id },
-      relations: ["user"],
-    });
+      const survey = await surveyRepository.findOne({
+        where: { id },
+        relations: ["user"],
+      });
 
-    if (!survey) {
-      return res.status(404).json({ message: "Survey not found" });
+      if (!survey) {
+        return res.status(404).json({ message: "Survey not found" });
+      }
+
+      await surveyRepository.delete(id);
+
+      return res.status(200).json({ message: "Deleted" });
+    } catch (err) {
+      console.log(err);
     }
-
-    await surveyRepository.delete(id);
-
-    return res.status(200).json({ message: "Deleted" });
   };
 }
