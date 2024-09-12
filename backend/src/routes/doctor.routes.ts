@@ -11,6 +11,10 @@ DocRouter.post(
   docControllers.editProfile
 );
 
+DocRouter.get("/doctors", docControllers.allDoctors);
+
+DocRouter.get("/doctor/:id", docControllers.doctorById);
+
 DocRouter.delete("delete/:id", docControllers.delete);
 
 export default DocRouter;

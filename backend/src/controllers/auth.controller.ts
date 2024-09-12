@@ -5,6 +5,7 @@ import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { RoleAssignment } from "../middleware/role";
 import { CreateUserDto } from "../entity/dtos/create-user";
+import { Survey } from "../entity/Survey";
 
 const scrypt = promisify(_scrypt);
 async function hashPassword(password: string) {
@@ -16,6 +17,7 @@ async function hashPassword(password: string) {
 
 const userRepository = AppDataSource.getRepository(User);
 const roleAssignment = new RoleAssignment();
+const surveyRepository = AppDataSource.getRepository(Survey);
 
 export class AuthControllers {
   signup = async (req: Request, res: Response) => {
@@ -70,29 +72,44 @@ export class AuthControllers {
   };
 
   signout = async (req: Request, res: Response) => {
-    if (req.session) {
-      req.session.destroy((err: Error) => {
-        if (err) {
-          return res.status(500).json({ message: "Failed to sign out" });
-        }
+    try {
+      if (req.session) {
+        req.session.destroy((err: Error) => {
+          if (err) {
+            return res.status(500).json({ message: "Failed to sign out" });
+          }
 
-        res.status(200).json({ message: "Signed out" });
-      });
-    } else {
-      res.status(400).json({ message: "No session to destroy" });
+          res.status(200).json({ message: "Signed out" });
+        });
+      } else {
+        res.status(400).json({ message: "No session to destroy" });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
   delete = async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id);
-    const user = await userRepository.findOne({ where: { id } });
+    try {
+      const id = parseInt(req.params.id);
 
-    if (!user) {
-      res.status(404).json({ message: "user not found" });
+      const user = await userRepository.findOne({
+        where: { id },
+        relations: ["surveys"],
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      await surveyRepository.delete({ user: { id: user.id } });
+      await userRepository.delete(id);
+
+      return res
+        .status(200)
+        .json({ message: "User and associated surveys deleted" });
+    } catch (err) {
+      console.log(err);
     }
-
-    await userRepository.delete(id);
-
-    return res.status(200).json({ message: "Deleted" });
   };
 }
