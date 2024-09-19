@@ -11,4 +11,6 @@ SurveyRouter.get("/survey/:id", surveyController.surveyById);
 SurveyRouter.put("/survey/:id", surveyController.update);
 SurveyRouter.delete("/survey/:id", surveyController.delete);
 
+SurveyRouter.get("/timetable", surveyController.getTimetable);
+
 export default SurveyRouter;

@@ -74,6 +74,27 @@ export class SurveyController {
     }
   };
 
+  getTimetable = async (req: Request, res: Response) => {
+    try {
+      const surveys = await surveyRepository.find();
+
+      let timetable = [];
+
+      for (let i = 0; i < surveys.length; i++) {
+        timetable.push({
+          id: surveys[i].id,
+          fullname: surveys[i].fullname,
+          date: surveys[i].date,
+          time: surveys[i].time,
+        });
+      }
+
+      return res.status(200).json({ timetable });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   usersSurveys = async (req: Request, res: Response) => {
     try {
       if (req.session) {
